@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import axios from "axios"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function So(){
+const[city,setcity]=useState("")
+
+function s(event){
+  setcity(event.target.value)
 }
 
-export default App;
+function d(){
+
+  const wheather=axios('https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=707e2a3c1c675e661c334479ae718d73')
+   wheather.then(function(success){
+    console.log(success)
+   }).catch(function(){
+    console.log("unsucess")
+   })
+}
+  return(<div>
+<input placeholder="city name?" onChange={s}></input>
+<button onClick={d}>get report</button>
+<p>wheather:</p>
+<p>temp:</p>
+<p>desc:</p>
+
+  </div>)
+}
+
+export default So
